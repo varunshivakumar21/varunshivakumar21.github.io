@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Services - Cost Approximation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="https://img.icons8.com/ios-filled/50/000000/plumber.png" alt="plumbing logo"/>
+            <span class="brand">Solar Services</span>
+        </div>
+        <div class="navbar-menu-icon" id="navbarMenuIcon">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav id="navbarNav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Openings</a></li>
+                <li><a href="about.html">Who We Are</a></li>    
+            </ul>
+        </nav>
+        <div class="contact-info" id="navbarContact">
+            <span class="phone"><img src="https://img.icons8.com/ios-filled/20/000000/phone.png" alt="phone icon"/> +91 98492 52991</span>
+            <a href="#" class="contact-btn">Contact</a>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Openings</a></li>
+            <li><a href="about.html">Who We Are</a></li>
+        </ul>
+        <div class="contact-info">
+            <span class="phone"><img src="https://img.icons8.com/ios-filled/20/000000/phone.png" alt="phone icon"/> +91 98492 52991</span>
+            <a href="#" class="contact-btn">Contact</a>
+        </div>
+    </div>
+
+    <header>
+        <h1>Commercial Solar Services</h1>
+        <p>Powering Industries with Affordable Solar Energy</p>
+    </header>
+
+    <div class="container">
+        <!-- Calculator Section -->
+        <section class="calculator-section">
+            <h2>Solar Cost Approximation</h2>
+            <p>Enter your current monthly electricity bill to estimate your solar costs and savings.</p>
+            <div class="input-group">
+                <label for="current-bill">Current Monthly Electricity Bill (₹):</label>
+                <input type="number" id="current-bill" placeholder="e.g., 500000" min="0" step="0.01">
+            </div>
+            <button onclick="calculateSavings()">Calculate</button>
+
+            <table id="results-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Estimated Monthly Units (kWh)</td>
+                        <td id="units"></td>
+                    </tr>
+                    <tr>
+                        <td>Current Bill Cost (₹)</td>
+                        <td id="current-cost"></td>
+                    </tr>
+                    <tr>
+                        <td>Solar Cost at ₹5/kWh (₹)</td>
+                        <td id="solar-cost"></td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Savings with Solar (₹)</td>
+                        <td id="savings"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Enquiry Form Section with Formspree -->
+        <section class="enquiry-section">
+            <div class="enquiry-text">
+                <h2>Submit a Solar Project Enquiry</h2>
+                <p>Our solar experts will guide you in your solar journey.</p>
+            </div>
+            <div class="enquiry-form">
+                <form action="https://formspree.io/f/xpwrlarv" method="POST" id="enquiry-form">
+                    <div class="input-group">
+                        <label for="name">Name <span>*</span></label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="company-name">Company Name <span>*</span></label>
+                        <input type="text" id="company-name" name="company_name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="whatsapp">WhatsApp Number <span>*</span></label>
+                        <input type="tel" id="whatsapp" name="whatsapp" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="city">City <span>*</span></label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="pincode">Company Pin Code</label>
+                        <input type="text" id="pincode" name="pincode">
+                    </div>
+                    <div class="input-group">
+                        <label for="monthly-bill">Average Monthly Bill (₹)</label>
+                        <input type="number" id="monthly-bill" name="monthly_bill" step="0.01">
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to Solar Services <a href="#">terms of service</a> & <a href="#">privacy policy</a></label>
+                    </div>
+                    <!-- Hidden field for redirect after submission -->
+                    <input type="hidden" name="_next" value="thank-you.html">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Calculator Logic
+        function calculateSavings() {
+            const currentBill = parseFloat(document.getElementById('current-bill').value);
+            if (isNaN(currentBill) || currentBill <= 0) {
+                alert('Please enter a valid bill amount.');
+                return;
+            }
+
+            // Assumptions
+            const currentRatePerUnit = 9; // ₹ per kWh (commercial rate)
+            const solarRatePerUnit = 5; // ₹ per kWh (solar provider rate)
+
+            // Calculations
+            const estimatedUnits = currentBill / currentRatePerUnit; // kWh
+            const solarCost = estimatedUnits * solarRatePerUnit; // ₹
+            const savings = currentBill - solarCost; // ₹
+
+            // Display results
+            document.getElementById('units').textContent = estimatedUnits.toFixed(2);
+            document.getElementById('current-cost').textContent = currentBill.toFixed(2);
+            document.getElementById('solar-cost').textContent = solarCost.toFixed(2);
+            document.getElementById('savings').textContent = savings.toFixed(2);
+
+            // Show table
+            document.getElementById('results-table').style.display = 'table';
+        }
+
+        // Mobile Menu Toggle
+        const menuIcon = document.getElementById('navbarMenuIcon');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuIcon.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            menuIcon.classList.toggle('open'); // Toggle open class for hamburger animation
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 800) {
+                mobileMenu.classList.remove('open');
+                menuIcon.classList.remove('open'); // Reset hamburger animation
+            }
+        });
+    </script>
+</body>
+</html>
