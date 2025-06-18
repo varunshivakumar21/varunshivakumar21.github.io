@@ -12,7 +12,7 @@ body {
 }
 
 header {
-    background: #004aad;
+        background: #215FC9;
     color: #fff;
     text-align: center;
     padding: 2rem;
@@ -98,7 +98,7 @@ tr:nth-child(even) {
 
 /* Enquiry Form Styles */
 .enquiry-section {
-    background: linear-gradient(90deg, #004aad 50%, #fff 50%);
+       background: linear-gradient(120deg, #1e5bbf 0%, #2566d6 100%);
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
@@ -185,7 +185,8 @@ tr:nth-child(even) {
     }
 }
 
-        * {
+
+        /* * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -196,11 +197,11 @@ tr:nth-child(even) {
             background-color: #f4f4f4;
             color: #333;
             line-height: 1.6;
-        }
+        } */
 
         /* Navbar Styles */
         .navbar {
-            background: #004aad;
+            background: #215FC9;
             color: #fff;
             display: flex;
             justify-content: space-between;
@@ -334,7 +335,7 @@ tr:nth-child(even) {
 
         /* Header Styles */
         header:not(.navbar) {
-            background: #004aad;
+            background: #215FC9;
             color: #fff;
             text-align: center;
             padding: 2rem;
@@ -519,4 +520,10 @@ tr:nth-child(even) {
             .enquiry-text, .enquiry-form {
                 width: 100%;
             }
+        }
+        .navbar{
+            margin-left:2.5%;
+            margin-top:2%;
+            margin-right:3%;
+
         }
